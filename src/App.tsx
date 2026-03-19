@@ -68,45 +68,38 @@ const WhatsAppButton = () => (
 const services = [
   {
     id: 1,
-    title: "Programming & Technical Help",
-    icon: <Code2 className="w-8 h-8" />,
-    items: ["C / C++ Solutions", "Python Programming", "DBMS & SQL Help", "Code Debugging", "Academic Assignment Help"],
+    title: "Web Development Services",
+    icon: <Globe className="w-8 h-8" />,
+    items: ["MERN Stack Development", "Full Stack Development", "Custom Web Applications", "E-commerce Solutions", "Progressive Web Apps (PWA)"],
     color: "bg-amber-500/10 text-amber-600"
   },
   {
     id: 2,
-    title: "AI & Data Science",
+    title: "AI Solutions & Automation",
     icon: <BrainCircuit className="w-8 h-8" />,
-    items: ["AI Solutions", "Machine Learning Models", "Deep Learning Projects", "Data Analysis Services"],
+    items: ["Custom AI Chatbots", "Machine Learning Models", "Deep Learning Projects", "Natural Language Processing", "Predictive Analytics"],
     color: "bg-orange-500/10 text-orange-600"
   },
   {
     id: 3,
-    title: "Website Development",
-    icon: <Globe className="w-8 h-8" />,
-    items: ["Web Development Services", "MERN Stack Development", "Full Stack Development", "Custom Web Applications"],
+    title: "Programming & Technical Help",
+    icon: <Code2 className="w-8 h-8" />,
+    items: ["Python Programming", "C / C++ Solutions", "DBMS & SQL Help", "Code Debugging & Optimization", "Technical Consulting"],
     color: "bg-rose-500/10 text-rose-600"
   },
   {
     id: 4,
     title: "Student Project Services",
     icon: <GraduationCap className="w-8 h-8" />,
-    items: ["Minor Projects", "Major Projects", "Research Papers"],
+    items: ["Final Year Projects", "Research Paper Support", "Academic Assignment Help", "Minor & Major Projects"],
     color: "bg-fuchsia-500/10 text-fuchsia-600"
   },
   {
     id: 5,
     title: "Academic & Professional",
     icon: <UserCircle className="w-8 h-8" />,
-    items: ["Assignments", "Resume + ATS Optimization", "Portfolio Creation"],
-    color: "bg-violet-500/10 text-violet-600"
-  },
-  {
-    id: 6,
-    title: "Business & Hosting",
-    icon: <Briefcase className="w-8 h-8" />,
-    items: ["Landing Pages", "Domain & Hosting Setup", "Custom Features"],
-    color: "bg-purple-500/10 text-purple-600"
+    items: ["Resume Building", "Portfolio Websites", "Technical Writing", "Career Guidance"],
+    color: "bg-indigo-500/10 text-indigo-600"
   }
 ];
 
@@ -339,26 +332,29 @@ const Hero = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-slate-900 uppercase bg-slate-50 rounded-full">
-            Expert Tech Solutions
+            IndiWebPros – Expert Tech Solutions
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 leading-tight mb-6">
-            IndiWebPros – Freelance Web Developer & <br className="hidden lg:block" />
-            <span className="text-slate-900">AI Solutions</span>
+            Expert <span className="text-amber-600">Freelance Web Developer India</span> & AI Solutions
           </h1>
-          <p className="max-w-2xl mx-auto text-lg text-slate-600 mb-10 leading-relaxed">
-            IndiWebPros provides top-tier freelance web developer India services, building advanced AI web applications and full stack development solutions for businesses worldwide.
+          <p className="max-w-3xl mx-auto text-lg md:text-xl text-slate-600 mb-10 leading-relaxed">
+            Elevate your business with <strong>IndiWebPros</strong>. We specialize in building high-performance <strong>AI web applications</strong>, 
+            scalable <strong>full stack development</strong>, and custom digital solutions tailored for startups and established enterprises. 
+            As a leading <strong>freelance web developer in India</strong>, we deliver professional, SEO-optimized websites that drive growth and maximize client conversion.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <Link 
               to="/contact" 
               className="w-full sm:w-auto bg-amber-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-700 transition-all shadow-xl shadow-amber-200 flex items-center justify-center gap-2"
+              aria-label="Start Your Project with IndiWebPros"
             >
               Start Your Project <ArrowRight className="w-5 h-5" />
             </Link>
             <Link 
-              to="/contact" 
+              to="/services" 
               className="w-full sm:w-auto bg-white text-amber-600 border border-amber-100 px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-50 transition-all"
+              aria-label="Get a Free Consultation from IndiWebPros"
             >
               Get a Free Consultation
             </Link>
@@ -366,14 +362,17 @@ const Hero = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto border-t border-slate-100 pt-12">
             {[
-              { label: "Fast Delivery", icon: <Clock className="w-5 h-5 text-slate-900" /> },
-              { label: "Affordable Pricing", icon: <Zap className="w-5 h-5 text-slate-900" /> },
-              { label: "Expert Support", icon: <ShieldCheck className="w-5 h-5 text-slate-900" /> },
-              { label: "24/7 Enquiry", icon: <MessageSquare className="w-5 h-5 text-slate-900" /> }
+              { label: "Fast Delivery", sub: "Launch in Days", icon: <Clock className="w-5 h-5 text-slate-900" aria-hidden="true" /> },
+              { label: "Secure & Scalable", sub: "Enterprise Grade", icon: <Zap className="w-5 h-5 text-slate-900" aria-hidden="true" /> },
+              { label: "Expert Tech", sub: "Modern Stack", icon: <ShieldCheck className="w-5 h-5 text-slate-900" aria-hidden="true" /> },
+              { label: "24/7 Support", sub: "Always Online", icon: <MessageSquare className="w-5 h-5 text-slate-900" aria-hidden="true" /> }
             ].map((item, i) => (
-              <div key={i} className="flex items-center justify-center gap-2 text-slate-600 font-medium text-sm">
-                {item.icon}
-                <span>{item.label}</span>
+              <div key={i} className="flex flex-col items-center justify-center gap-1 text-slate-600 font-medium text-sm">
+                <div className="flex items-center gap-2">
+                  {item.icon}
+                  <span className="text-slate-900 font-bold">{item.label}</span>
+                </div>
+                <span className="text-xs text-slate-400">{item.sub}</span>
               </div>
             ))}
           </div>
@@ -394,21 +393,32 @@ const About = () => {
             viewport={{ once: true }}
           >
             <span className="text-amber-600 font-bold tracking-widest uppercase text-sm mb-4 block">About IndiWebPros</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Your Partner in Digital Excellence</h2>
-            <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-              IndiWebPros is a premier digital solutions provider specializing in high-performance web development and cutting-edge AI implementations. Based in India, we empower businesses and students globally with technical expertise that drives real results.
-            </p>
-            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              Whether you're a startup looking for a MERN stack developer or a student needing expert AI project support, IndiWebPros delivers professional, scalable, and modern solutions tailored to your unique needs.
-            </p>
-            <div className="grid grid-cols-2 gap-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">IndiWebPros: Your Partner in Digital Excellence</h2>
+            <div className="space-y-4 text-lg text-slate-600 leading-relaxed">
+              <p>
+                At <strong>IndiWebPros</strong>, we are more than just developers; we are your strategic partners in digital growth. 
+                Our mission is to provide top-tier <strong>web development services</strong> that combine aesthetic appeal with technical robustness. 
+                Whether you need a simple landing page or a complex <strong>AI-driven application</strong>, we have the expertise to deliver.
+              </p>
+              <p>
+                We specialize in <strong>React</strong>, <strong>Next.js</strong>, and <strong>Node.js</strong>, ensuring your application is fast, 
+                secure, and future-proof. Our focus on <strong>SEO optimization</strong> and <strong>performance</strong> ensures your business 
+                stands out in the crowded digital landscape of India and beyond.
+              </p>
+              <p>
+                With a commitment to 100% client satisfaction, we've successfully delivered numerous projects across various industries, 
+                helping startups scale and established businesses modernize their tech stack.
+              </p>
+            </div>
+            
+            <div className="mt-10 grid grid-cols-2 gap-8">
               <div>
-                <h4 className="text-3xl font-bold text-slate-900 mb-1">500+</h4>
-                <p className="text-slate-500 text-sm">Projects Completed</p>
+                <div className="text-4xl font-bold text-amber-600 mb-1">50+</div>
+                <div className="text-sm font-medium text-slate-500 uppercase tracking-wider">Projects Delivered</div>
               </div>
               <div>
-                <h4 className="text-3xl font-bold text-slate-900 mb-1">98%</h4>
-                <p className="text-slate-500 text-sm">Client Satisfaction</p>
+                <div className="text-4xl font-bold text-amber-600 mb-1">100%</div>
+                <div className="text-sm font-medium text-slate-500 uppercase tracking-wider">Client Satisfaction</div>
               </div>
             </div>
           </motion.div>
@@ -420,8 +430,8 @@ const About = () => {
           >
             <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl">
               <img 
-                src="https://picsum.photos/seed/indiwebpros-about/800/800" 
-                alt="IndiWebPros Professional Workspace" 
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800"
+                alt="IndiWebPros Team working on professional web development and AI projects" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
                 loading="lazy"
@@ -440,10 +450,10 @@ const About = () => {
 
 const WhyChoose = () => {
   const reasons = [
-    { title: "Technical Expertise", desc: "Our team consists of expert MERN stack and AI developers with years of hands-on experience.", icon: <Code2 className="w-6 h-6" /> },
-    { title: "Client-Centric Approach", desc: "We prioritize your goals, ensuring every solution is built to solve your specific challenges.", icon: <UserCircle className="w-6 h-6" /> },
-    { title: "Modern Technologies", desc: "We use the latest frameworks like React, Next.js, and TensorFlow to build future-proof applications.", icon: <Zap className="w-6 h-6" /> },
-    { title: "Reliable Support", desc: "From initial consultation to post-delivery maintenance, IndiWebPros is with you every step of the way.", icon: <ShieldCheck className="w-6 h-6" /> }
+    { title: "Technical Expertise", desc: "Our team consists of expert MERN stack and AI developers with years of hands-on experience in building scalable applications.", icon: <Code2 className="w-6 h-6" /> },
+    { title: "Client-Centric Approach", desc: "We prioritize your business goals, ensuring every solution is custom-built to solve your specific challenges and drive growth.", icon: <UserCircle className="w-6 h-6" /> },
+    { title: "Modern Technologies", desc: "We leverage the latest frameworks like React, Next.js, and Node.js to build future-proof, high-performance web applications.", icon: <Zap className="w-6 h-6" /> },
+    { title: "SEO & Performance", desc: "Every project is optimized for search engines and lightning-fast performance to maximize your online visibility and conversion.", icon: <ShieldCheck className="w-6 h-6" /> }
   ];
 
   return (
@@ -451,7 +461,7 @@ const WhyChoose = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Why Choose IndiWebPros?</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">We combine technical mastery with a commitment to excellence, making us the preferred choice for web and AI solutions.</p>
+          <p className="text-slate-600 max-w-2xl mx-auto">We combine technical mastery with a commitment to excellence, making us the preferred choice for <strong>web development</strong> and <strong>AI solutions</strong> in India.</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, i) => (
@@ -474,8 +484,11 @@ const Services = () => {
     <section id="services" className="py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Web Development Services & AI Solutions</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">IndiWebPros provides comprehensive full-stack development and AI-driven technical solutions tailored for business growth and academic excellence.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Expert Web Development & AI Solutions</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto">
+            <strong>IndiWebPros</strong> provides comprehensive <strong>full stack development</strong> and <strong>AI-driven technical solutions</strong> 
+            tailored for business growth, performance, and scalability.
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -495,7 +508,7 @@ const Services = () => {
               <ul className="space-y-3">
                 {service.items.map((item, i) => (
                   <li key={i} className="flex items-center gap-2 text-slate-600">
-                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                    <ChevronRight className="w-4 h-4 text-amber-600" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -1125,8 +1138,65 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>IndiWebPros | Freelance Web Developer & AI Solutions</title>
-        <meta name="description" content="Professional web development and AI solutions for startups and businesses." />
+        <title>IndiWebPros | Expert Freelance Web Developer India & AI Solutions</title>
+        <meta name="description" content="IndiWebPros offers high-performance web development, AI solutions, and full-stack services in India. Boost your business with our expert digital solutions." />
+        <link rel="canonical" href="https://indiwebpros.in/" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "IndiWebPros",
+              "url": "https://indiwebpros.in/",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://indiwebpros.in/projects?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            }
+          `}
+        </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "IndiWebPros",
+              "image": "https://indiwebpros.in/logo.png",
+              "@id": "https://indiwebpros.in/",
+              "url": "https://indiwebpros.in/",
+              "telephone": "+919344482322",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "India",
+                "addressCountry": "IN"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 20.5937,
+                "longitude": 78.9629
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "00:00",
+                "closes": "23:59"
+              },
+              "sameAs": [
+                "https://www.linkedin.com/company/indiwebpros",
+                "https://github.com/indiwebpros"
+              ]
+            }
+          `}
+        </script>
       </Helmet>
       <Hero />
       <About />
@@ -1144,8 +1214,9 @@ const HomePage = () => {
 const AboutPage = () => (
   <div className="pt-20">
     <Helmet>
-      <title>About Us | IndiWebPros - Digital Excellence</title>
-      <meta name="description" content="Learn more about IndiWebPros, your partner in digital excellence. We specialize in high-performance web development and AI solutions." />
+      <title>About Us | IndiWebPros - Expert Web & AI Developers India</title>
+      <meta name="description" content="Learn more about IndiWebPros, your partner in digital excellence. We specialize in high-performance web development and AI solutions for startups and businesses." />
+      <link rel="canonical" href="https://indiwebpros.in/about" />
     </Helmet>
     <div className="bg-slate-50 py-12 border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1161,8 +1232,9 @@ const AboutPage = () => (
 const ServicesPage = () => (
   <div className="pt-20">
     <Helmet>
-      <title>Web Development Services | IndiWebPros</title>
-      <meta name="description" content="Custom web development, AI solutions, and full-stack services." />
+      <title>Web Development & AI Services | IndiWebPros India</title>
+      <meta name="description" content="Explore our expert web development services, custom AI solutions, and full-stack development. We build scalable digital products for global clients." />
+      <link rel="canonical" href="https://indiwebpros.in/services" />
     </Helmet>
     <div className="bg-slate-50 py-12 border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1177,8 +1249,9 @@ const ServicesPage = () => (
 const ProjectsPage = () => (
   <div className="pt-20">
     <Helmet>
-      <title>Portfolio | IndiWebPros Projects</title>
-      <meta name="description" content="Explore our completed web and AI projects." />
+      <title>Portfolio | IndiWebPros - Web & AI Project Showcases</title>
+      <meta name="description" content="Browse our portfolio of successful web development and AI projects. See how IndiWebPros helps clients achieve digital success." />
+      <link rel="canonical" href="https://indiwebpros.in/projects" />
     </Helmet>
     <div className="bg-slate-50 py-12 border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1192,8 +1265,9 @@ const ProjectsPage = () => (
 const ContactPage = () => (
   <div className="pt-20">
     <Helmet>
-      <title>Contact Us | IndiWebPros - Get a Quote</title>
-      <meta name="description" content="Get in touch with IndiWebPros for your next web or AI project. We offer free consultations and expert support." />
+      <title>Contact Us | IndiWebPros - Get a Free Quote Today</title>
+      <meta name="description" content="Ready to start your project? Contact IndiWebPros for a free consultation and quote on web development and AI solutions." />
+      <link rel="canonical" href="https://indiwebpros.in/contact" />
     </Helmet>
     <div className="bg-slate-50 py-12 border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
