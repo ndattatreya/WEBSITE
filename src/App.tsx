@@ -1,4 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
+import { 
+  BrowserRouter as Router, 
+  Routes, 
+  Route, 
+  Link, 
+  useLocation 
+} from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { 
   Code2, 
   BrainCircuit, 
@@ -20,7 +28,8 @@ import {
   ShieldCheck,
   ExternalLink,
   Clock,
-  Search
+  Search,
+  Phone
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { portfolio } from './data/portfolio';
@@ -29,27 +38,53 @@ import { AIChatbot } from './components/AIChatbot';
 // --- Data ---
 
 const SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwQVhk4l2AtLxl63xXMW7TP91hznjtIdaEJrbcsklbQs1CQWg9IlEtng-QyXBqucxq1iQ/exec";
+const WHATSAPP_NUMBER = "918074223801"; // Corrected number
+
+// --- Scroll To Top Component ---
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
+
+// --- Floating WhatsApp Button ---
+const WhatsAppButton = () => (
+  <a
+    href={`https://wa.me/${WHATSAPP_NUMBER}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="fixed bottom-6 left-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center group"
+    aria-label="Contact us on WhatsApp"
+  >
+    <Phone className="w-6 h-6 fill-current" />
+    <span className="absolute left-full ml-4 bg-white text-slate-900 px-4 py-2 rounded-lg text-sm font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+      Chat with us!
+    </span>
+  </a>
+);
 
 const services = [
   {
     id: 1,
     title: "Programming & Technical Help",
     icon: <Code2 className="w-8 h-8" />,
-    items: ["C / C++", "Python", "DBMS", "Debugging", "Assignment Help"],
+    items: ["C / C++ Solutions", "Python Programming", "DBMS & SQL Help", "Code Debugging", "Academic Assignment Help"],
     color: "bg-amber-500/10 text-amber-600"
   },
   {
     id: 2,
     title: "AI & Data Science",
     icon: <BrainCircuit className="w-8 h-8" />,
-    items: ["Machine Learning", "Deep Learning", "Data Analysis", "Computer Vision"],
+    items: ["AI Solutions", "Machine Learning Models", "Deep Learning Projects", "Data Analysis Services"],
     color: "bg-orange-500/10 text-orange-600"
   },
   {
     id: 3,
     title: "Website Development",
     icon: <Globe className="w-8 h-8" />,
-    items: ["Static Websites", "Dynamic Websites", "Full Stack Systems"],
+    items: ["Web Development Services", "MERN Stack Development", "Full Stack Development", "Custom Web Applications"],
     color: "bg-rose-500/10 text-rose-600"
   },
   {
@@ -184,7 +219,7 @@ const Logo = ({ isDark = false, size = "md" }: { isDark?: boolean, size?: "sm" |
       </div>
       <div className="leading-none">
         <span className={`${textSize} font-bold tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-          indiwebpros
+          IndiWebPros
         </span>
       </div>
     </div>
@@ -194,6 +229,7 @@ const Logo = ({ isDark = false, size = "md" }: { isDark?: boolean, size?: "sm" |
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -202,43 +238,49 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Services', href: '/services' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Contact', href: '/contact' },
   ];
 
+  const isActive = (path: string) => location.pathname === path;
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm py-5' : 'bg-transparent py-8'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || location.pathname !== '/' ? 'bg-white/80 backdrop-blur-md shadow-sm py-5' : 'bg-transparent py-8'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Logo isDark={!isScrolled} size={isScrolled ? "md" : "lg"} />
-          </div>
+          <Link to="/" className="flex items-center gap-2">
+            <Logo isDark={!isScrolled && location.pathname === '/'} size={isScrolled ? "md" : "lg"} />
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a 
+              <Link 
                 key={link.name} 
-                href={link.href} 
-                className="text-base font-medium text-slate-600 hover:text-slate-900 transition-colors"
+                to={link.href} 
+                className={`text-base font-medium transition-colors ${
+                  isActive(link.href) 
+                    ? 'text-amber-600' 
+                    : isScrolled || location.pathname !== '/' ? 'text-slate-600 hover:text-slate-900' : 'text-white/80 hover:text-white'
+                }`}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
-            <a 
-              href="#contact" 
+            <Link 
+              to="/contact" 
               className="bg-amber-600 text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-amber-700 transition-all shadow-md hover:shadow-amber-200"
             >
               Enquire Now
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="md:hidden p-2 text-slate-600"
+            className={`md:hidden p-2 ${isScrolled || location.pathname !== '/' ? 'text-slate-600' : 'text-white'}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X /> : <Menu />}
@@ -257,22 +299,22 @@ const Navbar = () => {
           >
             <div className="px-4 py-8 flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a 
+                <Link 
                   key={link.name} 
-                  href={link.href} 
-                  className="text-lg font-medium text-slate-600"
+                  to={link.href} 
+                  className={`text-lg font-medium ${isActive(link.href) ? 'text-amber-600' : 'text-slate-600'}`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
-              <a 
-                href="#contact" 
+              <Link 
+                to="/contact" 
                 className="bg-slate-900 text-white px-6 py-3 rounded-xl text-center font-semibold"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Enquire Now
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}
@@ -300,26 +342,26 @@ const Hero = () => {
             Expert Tech Solutions
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 leading-tight mb-6">
-            Professional Programming, AI & <br className="hidden lg:block" />
-            <span className="text-slate-900">Website Development</span> Services
+            IndiWebPros – Freelance Web Developer & <br className="hidden lg:block" />
+            <span className="text-slate-900">AI Solutions</span>
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-slate-600 mb-10 leading-relaxed">
-            We help students and businesses with programming assignments, AI solutions, academic projects, and professional websites.
+            IndiWebPros provides top-tier freelance web developer India services, building advanced AI web applications and full stack development solutions for businesses worldwide.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <a 
-              href="#services" 
+            <Link 
+              to="/contact" 
               className="w-full sm:w-auto bg-amber-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-700 transition-all shadow-xl shadow-amber-200 flex items-center justify-center gap-2"
             >
-              View Services <ArrowRight className="w-5 h-5" />
-            </a>
-            <a 
-              href="#contact" 
+              Start Your Project <ArrowRight className="w-5 h-5" />
+            </Link>
+            <Link 
+              to="/contact" 
               className="w-full sm:w-auto bg-white text-amber-600 border border-amber-100 px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-50 transition-all"
             >
-              Enquire Now
-            </a>
+              Get a Free Consultation
+            </Link>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto border-t border-slate-100 pt-12">
@@ -341,13 +383,99 @@ const Hero = () => {
   );
 };
 
+const About = () => {
+  return (
+    <section id="about" className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="text-amber-600 font-bold tracking-widest uppercase text-sm mb-4 block">About IndiWebPros</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Your Partner in Digital Excellence</h2>
+            <p className="text-lg text-slate-600 mb-6 leading-relaxed">
+              IndiWebPros is a premier digital solutions provider specializing in high-performance web development and cutting-edge AI implementations. Based in India, we empower businesses and students globally with technical expertise that drives real results.
+            </p>
+            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+              Whether you're a startup looking for a MERN stack developer or a student needing expert AI project support, IndiWebPros delivers professional, scalable, and modern solutions tailored to your unique needs.
+            </p>
+            <div className="grid grid-cols-2 gap-8">
+              <div>
+                <h4 className="text-3xl font-bold text-slate-900 mb-1">500+</h4>
+                <p className="text-slate-500 text-sm">Projects Completed</p>
+              </div>
+              <div>
+                <h4 className="text-3xl font-bold text-slate-900 mb-1">98%</h4>
+                <p className="text-slate-500 text-sm">Client Satisfaction</p>
+              </div>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl">
+              <img 
+                src="https://picsum.photos/seed/indiwebpros-about/800/800" 
+                alt="IndiWebPros Professional Workspace" 
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+                loading="lazy"
+              />
+            </div>
+            <div className="absolute -bottom-6 -right-6 bg-amber-600 text-white p-8 rounded-3xl shadow-xl hidden md:block">
+              <p className="text-2xl font-bold mb-1">5+ Years</p>
+              <p className="text-amber-100 text-sm">Industry Experience</p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const WhyChoose = () => {
+  const reasons = [
+    { title: "Technical Expertise", desc: "Our team consists of expert MERN stack and AI developers with years of hands-on experience.", icon: <Code2 className="w-6 h-6" /> },
+    { title: "Client-Centric Approach", desc: "We prioritize your goals, ensuring every solution is built to solve your specific challenges.", icon: <UserCircle className="w-6 h-6" /> },
+    { title: "Modern Technologies", desc: "We use the latest frameworks like React, Next.js, and TensorFlow to build future-proof applications.", icon: <Zap className="w-6 h-6" /> },
+    { title: "Reliable Support", desc: "From initial consultation to post-delivery maintenance, IndiWebPros is with you every step of the way.", icon: <ShieldCheck className="w-6 h-6" /> }
+  ];
+
+  return (
+    <section className="py-24 bg-slate-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Why Choose IndiWebPros?</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto">We combine technical mastery with a commitment to excellence, making us the preferred choice for web and AI solutions.</p>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {reasons.map((reason, i) => (
+            <div key={i} className="bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-all group">
+              <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-amber-600 group-hover:text-white transition-all">
+                {reason.icon}
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">{reason.title}</h3>
+              <p className="text-sm text-slate-500 leading-relaxed">{reason.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Services = () => {
   return (
     <section id="services" className="py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Our Specialized Services</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">Comprehensive technical solutions tailored for academic success and business growth.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Web Development Services & AI Solutions</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto">IndiWebPros provides comprehensive full-stack development and AI-driven technical solutions tailored for business growth and academic excellence.</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -405,9 +533,9 @@ const Pricing = () => {
                     </div>
                     <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-50">
                       <span className="text-2xl font-bold text-slate-900">{plan.price}</span>
-                      <a href="#contact" className="bg-amber-50 text-amber-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-amber-600 hover:text-white transition-all">
+                      <Link to="/contact" className="bg-amber-50 text-amber-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-amber-600 hover:text-white transition-all">
                         Enquire Now
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 ))}
@@ -456,8 +584,8 @@ const Portfolio = () => {
     <section id="portfolio" className="py-24 bg-slate-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Technical Portfolio</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">Take a look at some of our featured projects and technical implementations.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Work | Portfolio of Completed Projects</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto">Explore the IndiWebPros portfolio featuring successful case studies in web development, AI solutions, and full-stack applications.</p>
         </div>
 
         {/* Search and Filter Controls */}
@@ -543,9 +671,10 @@ const Portfolio = () => {
                   <div className="relative aspect-video overflow-hidden">
                     <img 
                       src={project.image} 
-                      alt={project.title} 
+                      alt={`${project.title} - Developed by IndiWebPros`} 
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       referrerPolicy="no-referrer"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
                     <div className="absolute bottom-4 left-4">
@@ -627,8 +756,8 @@ const Process = () => {
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">How We Work</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">Our streamlined process ensures high-quality delivery and client satisfaction.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">How IndiWebPros Delivers Excellence</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto">Our streamlined development process ensures high-quality delivery, transparency, and complete client satisfaction.</p>
         </div>
 
         <div className="relative">
@@ -660,7 +789,7 @@ const Testimonials = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">What Our Clients Say</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">What Our Clients Say About IndiWebPros</h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -750,9 +879,9 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div>
-            <h2 className="text-4xl font-bold text-slate-900 mb-6">Get Help With Your Project</h2>
+            <h2 className="text-4xl font-bold text-slate-900 mb-6">Contact Us Today</h2>
             <p className="text-lg text-slate-600 mb-8">
-              Have a complex assignment or a business idea? Reach out to us and let's build something amazing together.
+              Ready to start your project? Reach out to IndiWebPros and let's build something amazing together.
             </p>
 
             <div className="space-y-6">
@@ -939,7 +1068,7 @@ const Footer = () => {
               <Logo isDark={true} />
             </div>
             <p className="max-w-sm mb-8">
-              Empowering students and businesses with cutting-edge technical solutions, AI implementations, and professional web presence.
+              IndiWebPros empowers businesses and students with cutting-edge technical solutions, AI implementations, and professional web presence.
             </p>
             <div className="flex gap-4">
               <a href="https://www.linkedin.com/in/we-freelance" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-slate-800 flex items-center justify-center hover:bg-slate-900 hover:border-slate-900 hover:text-white transition-all">
@@ -952,20 +1081,30 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6">Quick Links</h4>
+            <h4 className="text-white font-bold mb-6">Services</h4>
             <ul className="space-y-4">
-              <li><a href="#home" className="hover:text-slate-400 transition-colors">Home</a></li>
-              <li><a href="#services" className="hover:text-slate-400 transition-colors">Services</a></li>
-              <li><a href="#pricing" className="hover:text-slate-400 transition-colors">Pricing</a></li>
-              <li><a href="#portfolio" className="hover:text-slate-400 transition-colors">Portfolio</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Web Development</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">AI Solutions</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Full Stack Apps</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Student Projects</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6">Contact</h4>
+            <h4 className="text-white font-bold mb-6">Contact Info</h4>
             <ul className="space-y-4">
               <li className="flex items-center gap-2"><Mail className="w-4 h-4" /> admin@indiwebpros.in</li>
-              <li className="flex items-center gap-2"><MessageSquare className="w-4 h-4" /> soon</li>
+              <li className="flex items-center gap-2"><MessageSquare className="w-4 h-4" /> +91 80742 23801</li>
+              <li className="mt-4">
+                <a 
+                  href="https://wa.me/918074223801" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-rose-700 transition-all"
+                >
+                  WhatsApp Us
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -982,21 +1121,108 @@ const Footer = () => {
   );
 };
 
+const HomePage = () => {
+  return (
+    <>
+      <Helmet>
+        <title>IndiWebPros | Freelance Web Developer & AI Solutions</title>
+        <meta name="description" content="Professional web development and AI solutions for startups and businesses." />
+      </Helmet>
+      <Hero />
+      <About />
+      <WhyChoose />
+      <Services />
+      <Portfolio />
+      <Pricing />
+      <Process />
+      <Testimonials />
+      <Contact />
+    </>
+  );
+};
+
+const AboutPage = () => (
+  <div className="pt-20">
+    <Helmet>
+      <title>About Us | IndiWebPros - Digital Excellence</title>
+      <meta name="description" content="Learn more about IndiWebPros, your partner in digital excellence. We specialize in high-performance web development and AI solutions." />
+    </Helmet>
+    <div className="bg-slate-50 py-12 border-b border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-slate-900">About IndiWebPros</h1>
+      </div>
+    </div>
+    <About />
+    <WhyChoose />
+    <Process />
+  </div>
+);
+
+const ServicesPage = () => (
+  <div className="pt-20">
+    <Helmet>
+      <title>Web Development Services | IndiWebPros</title>
+      <meta name="description" content="Custom web development, AI solutions, and full-stack services." />
+    </Helmet>
+    <div className="bg-slate-50 py-12 border-b border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-slate-900">Our Services at IndiWebPros</h1>
+      </div>
+    </div>
+    <Services />
+    <Pricing />
+  </div>
+);
+
+const ProjectsPage = () => (
+  <div className="pt-20">
+    <Helmet>
+      <title>Portfolio | IndiWebPros Projects</title>
+      <meta name="description" content="Explore our completed web and AI projects." />
+    </Helmet>
+    <div className="bg-slate-50 py-12 border-b border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-slate-900">IndiWebPros Portfolio & Projects</h1>
+      </div>
+    </div>
+    <Portfolio />
+  </div>
+);
+
+const ContactPage = () => (
+  <div className="pt-20">
+    <Helmet>
+      <title>Contact Us | IndiWebPros - Get a Quote</title>
+      <meta name="description" content="Get in touch with IndiWebPros for your next web or AI project. We offer free consultations and expert support." />
+    </Helmet>
+    <div className="bg-slate-50 py-12 border-b border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-slate-900">Contact IndiWebPros</h1>
+      </div>
+    </div>
+    <Contact />
+  </div>
+);
+
 export default function App() {
   return (
-    <div className="min-h-screen bg-white font-sans selection:bg-slate-100 selection:text-slate-900">
-      <Navbar />
-      <main>
-        <Hero />
-        <Services />
-        <Pricing />
-        <Portfolio />
-        <Process />
-        <Testimonials />
-        <Contact />
-      </main>
-      <Footer />
-      <AIChatbot />
-    </div>
+    <Router>
+      <ScrollToTop />
+      <div className="min-h-screen bg-white font-sans selection:bg-slate-100 selection:text-slate-900">
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Routes>
+        </main>
+        <Footer />
+        <AIChatbot />
+        <WhatsAppButton />
+      </div>
+    </Router>
   );
 }
