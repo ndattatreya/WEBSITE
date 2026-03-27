@@ -1,26 +1,26 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
-import { 
-  BrowserRouter as Router, 
-  Routes, 
-  Route, 
-  Link, 
-  useLocation 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useLocation
 } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { 
-  Code2, 
-  BrainCircuit, 
-  Globe, 
-  GraduationCap, 
-  UserCircle, 
-  Briefcase, 
-  CheckCircle2, 
-  ArrowRight, 
-  MessageSquare, 
-  Mail, 
-  Linkedin, 
-  Instagram, 
-  Menu, 
+import {
+  Code2,
+  BrainCircuit,
+  Globe,
+  GraduationCap,
+  UserCircle,
+  Briefcase,
+  CheckCircle2,
+  ArrowRight,
+  MessageSquare,
+  Mail,
+  Linkedin,
+  Instagram,
+  Menu,
   X,
   ChevronRight,
   Star,
@@ -35,6 +35,10 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { portfolio } from './data/portfolio';
 import { AIChatbot } from './components/AIChatbot';
+const CapstonePage = lazy(() => import('./pages/Capstone'))
+const FinalYearPage = lazy(() => import('./pages/FinalYear'))
+const ResearchPage = lazy(() => import('./pages/Research'))
+const PlagiarismPage = lazy(() => import('./pages/Plagiarism'))
 
 // --- Data ---
 
@@ -200,35 +204,35 @@ const LogoMark = ({ className }: { className?: string }) => (
       </linearGradient>
     </defs>
     {/* Outer Globe Arc */}
-    <path 
-      d="M28 16C28 22.6274 22.6274 28 16 28C9.37258 28 4 22.6274 4 16" 
-      stroke="url(#logo-gradient)" 
-      strokeWidth="2" 
+    <path
+      d="M28 16C28 22.6274 22.6274 28 16 28C9.37258 28 4 22.6274 4 16"
+      stroke="url(#logo-gradient)"
+      strokeWidth="2"
       strokeLinecap="round"
       className="opacity-30"
     />
     {/* Brackets */}
-    <path 
-      d="M9 10L5 16L9 22" 
-      stroke="url(#logo-gradient)" 
-      strokeWidth="2.5" 
-      strokeLinecap="round" 
-      strokeLinejoin="round" 
+    <path
+      d="M9 10L5 16L9 22"
+      stroke="url(#logo-gradient)"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
-    <path 
-      d="M23 10L27 16L23 22" 
-      stroke="url(#logo-gradient)" 
-      strokeWidth="2.5" 
-      strokeLinecap="round" 
-      strokeLinejoin="round" 
+    <path
+      d="M23 10L27 16L23 22"
+      stroke="url(#logo-gradient)"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     {/* Central AI Node & Connections */}
     <circle cx="16" cy="16" r="3.5" fill="url(#logo-gradient)" />
-    <path 
-      d="M16 7V12.5M16 19.5V25M7 16H12.5M19.5 16H25" 
-      stroke="url(#logo-gradient)" 
-      strokeWidth="1.5" 
-      strokeLinecap="round" 
+    <path
+      d="M16 7V12.5M16 19.5V25M7 16H12.5M19.5 16H25"
+      stroke="url(#logo-gradient)"
+      strokeWidth="1.5"
+      strokeLinecap="round"
     />
     <circle cx="16" cy="7" r="1" fill="url(#logo-gradient)" className="opacity-60" />
     <circle cx="16" cy="25" r="1" fill="url(#logo-gradient)" className="opacity-60" />
@@ -241,7 +245,7 @@ const Logo = ({ isDark = false, size = "md" }: { isDark?: boolean, size?: "sm" |
   const boxSize = size === "sm" ? "w-8 h-8" : size === "lg" ? "w-14 h-14" : "w-11 h-11";
   const iconSize = size === "sm" ? "w-5 h-5" : size === "lg" ? "w-8 h-8" : "w-7 h-7";
   const textSize = size === "sm" ? "text-lg" : size === "lg" ? "text-3xl" : "text-2xl";
-  
+
   return (
     <div className="flex items-center gap-3 group cursor-pointer">
       <div className={`relative ${boxSize} flex items-center justify-center`}>
@@ -293,20 +297,19 @@ const Navbar = () => {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                to={link.href} 
-                className={`text-base font-medium transition-colors ${
-                  isActive(link.href) 
-                    ? 'text-amber-600' 
+              <Link
+                key={link.name}
+                to={link.href}
+                className={`text-base font-medium transition-colors ${isActive(link.href)
+                    ? 'text-amber-600'
                     : isScrolled || location.pathname !== '/' ? 'text-slate-600 hover:text-slate-900' : 'text-white/80 hover:text-white'
-                }`}
+                  }`}
               >
                 {link.name}
               </Link>
             ))}
-            <Link 
-              to="/contact" 
+            <Link
+              to="/contact"
               className="bg-amber-600 text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-amber-700 transition-all shadow-md hover:shadow-amber-200"
             >
               Enquire Now
@@ -314,7 +317,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button 
+          <button
             className={`md:hidden p-2 ${isScrolled || location.pathname !== '/' ? 'text-slate-600' : 'text-white'}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -326,7 +329,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -334,17 +337,17 @@ const Navbar = () => {
           >
             <div className="px-4 py-8 flex flex-col gap-4">
               {navLinks.map((link) => (
-                <Link 
-                  key={link.name} 
-                  to={link.href} 
+                <Link
+                  key={link.name}
+                  to={link.href}
                   className={`text-lg font-medium ${isActive(link.href) ? 'text-amber-600' : 'text-slate-600'}`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 className="bg-slate-900 text-white px-6 py-3 rounded-xl text-center font-semibold"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -380,21 +383,21 @@ const Hero = () => {
             IndiWebPros – <span className="text-amber-600">Freelance Web Developer</span> & AI Solutions in India
           </h1>
           <p className="max-w-3xl mx-auto text-lg md:text-xl text-slate-600 mb-10 leading-relaxed">
-            Transform your business with high-performance <strong>web development services</strong> and <strong>AI solutions</strong>. 
-            At <strong>IndiWebPros</strong>, we solve complex business problems with scalable <strong>full stack development</strong>, 
+            Transform your business with high-performance <strong>web development services</strong> and <strong>AI solutions</strong>.
+            At <strong>IndiWebPros</strong>, we solve complex business problems with scalable <strong>full stack development</strong>,
             intelligent automation, and SEO-optimized digital experiences that drive real growth.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Link 
-              to="/contact" 
+            <Link
+              to="/contact"
               className="w-full sm:w-auto bg-amber-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-700 transition-all shadow-xl shadow-amber-200 flex items-center justify-center gap-2"
               aria-label="Start Your Project with IndiWebPros"
             >
               Start Your Project <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link 
-              to="/services" 
+            <Link
+              to="/services"
               className="w-full sm:w-auto bg-white text-amber-600 border border-amber-100 px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-50 transition-all"
               aria-label="Get a Free Consultation from IndiWebPros"
             >
@@ -438,23 +441,23 @@ const About = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">IndiWebPros: Your Strategic Partner in Digital Growth</h2>
             <div className="space-y-4 text-lg text-slate-600 leading-relaxed">
               <p>
-                At <strong>IndiWebPros</strong>, we don't just build websites; we create digital assets that drive revenue. 
-                As a premier <strong>freelance web developer in India</strong>, we understand that your online presence is the face of your business. 
+                At <strong>IndiWebPros</strong>, we don't just build websites; we create digital assets that drive revenue.
+                As a premier <strong>freelance web developer in India</strong>, we understand that your online presence is the face of your business.
                 That's why we focus on building <strong>high-converting websites</strong> that combine stunning design with <strong>SEO-friendly architecture</strong>.
               </p>
               <p>
-                Our expertise spans across <strong>full stack development</strong> using the MERN stack (React, Node.js, MongoDB) and 
-                <strong>AI-driven solutions</strong> that automate repetitive tasks and provide intelligent insights. 
-                We help businesses in India and globally to stay ahead of the curve by implementing 
+                Our expertise spans across <strong>full stack development</strong> using the MERN stack (React, Node.js, MongoDB) and
+                <strong>AI-driven solutions</strong> that automate repetitive tasks and provide intelligent insights.
+                We help businesses in India and globally to stay ahead of the curve by implementing
                 <strong>smart applications</strong> and <strong>scalable backend systems</strong>.
               </p>
               <p>
-                Whether you are a startup looking for your first <strong>MVP</strong> or an established enterprise needing 
-                <strong>technical consulting</strong>, IndiWebPros delivers custom solutions that are fast, secure, and 
+                Whether you are a startup looking for your first <strong>MVP</strong> or an established enterprise needing
+                <strong>technical consulting</strong>, IndiWebPros delivers custom solutions that are fast, secure, and
                 optimized for <strong>maximum client conversion</strong>.
               </p>
             </div>
-            
+
             <div className="mt-10 grid grid-cols-2 gap-8">
               <div>
                 <div className="text-4xl font-bold text-amber-600 mb-1">50+</div>
@@ -473,9 +476,9 @@ const About = () => {
             className="relative"
           >
             <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl">
-              <img 
+              <img
                 src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800"
-                alt="IndiWebPros Team working on professional web development and AI projects" 
+                alt="IndiWebPros Team working on professional web development and AI projects"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
                 loading="lazy"
@@ -530,7 +533,7 @@ const Services = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Expert Web Development & AI Solutions</h2>
           <p className="text-slate-600 max-w-2xl mx-auto">
-            <strong>IndiWebPros</strong> provides comprehensive <strong>full stack development</strong> and <strong>AI-driven technical solutions</strong> 
+            <strong>IndiWebPros</strong> provides comprehensive <strong>full stack development</strong> and <strong>AI-driven technical solutions</strong>
             tailored for business growth, performance, and scalability.
           </p>
         </div>
@@ -630,11 +633,11 @@ const Portfolio = () => {
   const filteredPortfolio = portfolio.filter(project => {
     const matchesFilter = filter === 'all' ? true : project.type === filter;
     const matchesSubFilter = subFilter === 'all' ? true : project.category === subFilter;
-    const matchesSearch = 
+    const matchesSearch =
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    
+
     return matchesFilter && matchesSubFilter && matchesSearch;
   });
 
@@ -659,7 +662,7 @@ const Portfolio = () => {
               className="w-full pl-12 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-600 transition-all text-sm placeholder:text-slate-500"
             />
             {searchQuery && (
-              <button 
+              <button
                 onClick={() => setSearchQuery('')}
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors"
               >
@@ -674,11 +677,10 @@ const Portfolio = () => {
               <button
                 key={type}
                 onClick={() => setFilter(type as any)}
-                className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${
-                  filter === type 
-                    ? 'bg-slate-700 text-white shadow-lg shadow-slate-900/20' 
+                className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${filter === type
+                    ? 'bg-slate-700 text-white shadow-lg shadow-slate-900/20'
                     : 'text-slate-400 hover:text-white'
-                }`}
+                  }`}
               >
                 {type.charAt(0).toUpperCase() + type.slice(1)}
               </button>
@@ -689,7 +691,7 @@ const Portfolio = () => {
         {/* Sub-Filter Tabs */}
         <AnimatePresence>
           {availableSubFilters.length > 0 && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -699,11 +701,10 @@ const Portfolio = () => {
                 <button
                   key={cat}
                   onClick={() => setSubFilter(cat)}
-                  className={`px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all border ${
-                    subFilter === cat 
-                      ? 'bg-slate-700/10 border-slate-500 text-slate-400' 
+                  className={`px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all border ${subFilter === cat
+                      ? 'bg-slate-700/10 border-slate-500 text-slate-400'
                       : 'bg-slate-800/50 border-slate-700 text-slate-500 hover:text-slate-300 hover:border-slate-600'
-                  }`}
+                    }`}
                 >
                   {cat}
                 </button>
@@ -717,92 +718,92 @@ const Portfolio = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <AnimatePresence mode="popLayout">
                 {filteredPortfolio.slice(0, showAll ? undefined : 6).map((project, i) => (
-                  <motion.div 
+                  <motion.div
                     key={project.title}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  whileHover={{ y: -10 }}
-                  className="group bg-slate-800/50 rounded-3xl overflow-hidden border border-slate-700/50 flex flex-col"
-                >
-                  <div className="relative aspect-video overflow-hidden">
-                    <img 
-                      src={project.image} 
-                      alt={`${project.title} - Developed by IndiWebPros`} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      referrerPolicy="no-referrer"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
-                    <div className="absolute bottom-4 left-4">
-                      <span className="text-[10px] font-bold tracking-widest text-slate-400 uppercase bg-slate-900/80 px-2 py-1 rounded-md backdrop-blur-sm">
-                        {project.category}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6 flex-grow flex flex-col">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-xl font-bold group-hover:text-slate-400 transition-colors">{project.title}</h3>
-                      {project.problem && (
-                        <span className="text-[9px] font-bold uppercase tracking-widest bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-full border border-amber-500/20">
-                          Case Study
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    whileHover={{ y: -10 }}
+                    className="group bg-slate-800/50 rounded-3xl overflow-hidden border border-slate-700/50 flex flex-col"
+                  >
+                    <div className="relative aspect-video overflow-hidden">
+                      <img
+                        src={project.image}
+                        alt={`${project.title} - Developed by IndiWebPros`}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        referrerPolicy="no-referrer"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
+                      <div className="absolute bottom-4 left-4">
+                        <span className="text-[10px] font-bold tracking-widest text-slate-400 uppercase bg-slate-900/80 px-2 py-1 rounded-md backdrop-blur-sm">
+                          {project.category}
                         </span>
+                      </div>
+                    </div>
+                    <div className="p-6 flex-grow flex flex-col">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-xl font-bold group-hover:text-slate-400 transition-colors">{project.title}</h3>
+                        {project.problem && (
+                          <span className="text-[9px] font-bold uppercase tracking-widest bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-full border border-amber-500/20">
+                            Case Study
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm text-slate-400 mb-4 line-clamp-2">{project.desc}</p>
+
+                      {project.problem && (
+                        <div className="mb-4 space-y-3 p-4 bg-slate-900/50 rounded-2xl border border-slate-700/30">
+                          <div>
+                            <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">The Problem</h4>
+                            <p className="text-xs text-slate-400 line-clamp-2 italic">"{project.problem}"</p>
+                          </div>
+                          <div>
+                            <h4 className="text-[10px] font-bold uppercase tracking-wider text-emerald-500/70 mb-1">The Result</h4>
+                            <p className="text-xs text-slate-300 line-clamp-2 font-medium">{project.result}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="flex flex-wrap gap-2 mb-6 mt-auto">
+                        {project.tags.map((tag, j) => (
+                          <span key={j} className="text-[10px] font-medium px-2 py-1 bg-slate-700/50 rounded-md text-slate-300">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {project.link && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-slate-300 transition-colors group/link"
+                        >
+                          View Live Project <ExternalLink className="w-4 h-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
+                        </a>
                       )}
                     </div>
-                    <p className="text-sm text-slate-400 mb-4 line-clamp-2">{project.desc}</p>
-                    
-                    {project.problem && (
-                      <div className="mb-4 space-y-3 p-4 bg-slate-900/50 rounded-2xl border border-slate-700/30">
-                        <div>
-                          <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">The Problem</h4>
-                          <p className="text-xs text-slate-400 line-clamp-2 italic">"{project.problem}"</p>
-                        </div>
-                        <div>
-                          <h4 className="text-[10px] font-bold uppercase tracking-wider text-emerald-500/70 mb-1">The Result</h4>
-                          <p className="text-xs text-slate-300 line-clamp-2 font-medium">{project.result}</p>
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="flex flex-wrap gap-2 mb-6 mt-auto">
-                      {project.tags.map((tag, j) => (
-                        <span key={j} className="text-[10px] font-medium px-2 py-1 bg-slate-700/50 rounded-md text-slate-300">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {project.link && (
-                      <a 
-                        href={project.link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-slate-300 transition-colors group/link"
-                      >
-                        View Live Project <ExternalLink className="w-4 h-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
-                      </a>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-
-          {filteredPortfolio.length > 6 && (
-            <div className="mt-12 text-center">
-              <button
-                onClick={() => setShowAll(!showAll)}
-                className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg shadow-amber-900/20 group"
-              >
-                {showAll ? 'Show Less' : 'View More Projects'}
-                <ChevronRight className={`w-5 h-5 transition-transform ${showAll ? '-rotate-90' : 'rotate-90 group-hover:translate-x-1'}`} />
-              </button>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
-          )}
-        </>
-      ) : (
-          <motion.div 
+
+            {filteredPortfolio.length > 6 && (
+              <div className="mt-12 text-center">
+                <button
+                  onClick={() => setShowAll(!showAll)}
+                  className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg shadow-amber-900/20 group"
+                >
+                  {showAll ? 'Show Less' : 'View More Projects'}
+                  <ChevronRight className={`w-5 h-5 transition-transform ${showAll ? '-rotate-90' : 'rotate-90 group-hover:translate-x-1'}`} />
+                </button>
+              </div>
+            )}
+          </>
+        ) : (
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="text-center py-20 bg-slate-800/30 rounded-3xl border border-dashed border-slate-700"
@@ -812,7 +813,7 @@ const Portfolio = () => {
             </div>
             <h3 className="text-xl font-bold mb-2">No projects found</h3>
             <p className="text-slate-400 mb-6">We couldn't find any projects matching your search criteria.</p>
-            <button 
+            <button
               onClick={() => {
                 setSearchQuery('');
                 setFilter('all');
@@ -841,7 +842,7 @@ const Process = () => {
         <div className="relative">
           {/* Timeline Line */}
           <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-100 -translate-y-1/2" />
-          
+
           <div className="grid lg:grid-cols-4 gap-12 relative">
             {processSteps.map((step, i) => (
               <div key={i} className="text-center group">
@@ -984,9 +985,9 @@ const Contact = () => {
             </div>
 
             <div className="mt-12">
-              <a 
-                href="https://wa.me/xx" 
-                target="_blank" 
+              <a
+                href="https://wa.me/xx"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-full font-bold hover:bg-slate-950 transition-all shadow-lg shadow-slate-100"
               >
@@ -997,7 +998,7 @@ const Contact = () => {
 
           <div className="bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100">
             {successMessage ? (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-12"
@@ -1007,7 +1008,7 @@ const Contact = () => {
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-4">Enquiry Sent!</h3>
                 <p className="text-slate-600 mb-8">{successMessage}</p>
-                <button 
+                <button
                   onClick={() => setSuccessMessage('')}
                   className="text-slate-900 font-bold hover:underline"
                 >
@@ -1019,25 +1020,25 @@ const Contact = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Full Name</label>
-                    <input 
+                    <input
                       required
                       name="Name"
                       value={formData.Name}
                       onChange={handleChange}
-                      type="text" 
-                      placeholder="John Doe" 
+                      type="text"
+                      placeholder="John Doe"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none transition-all text-sm"
                     />
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Email Address</label>
-                    <input 
+                    <input
                       required
                       name="Email"
                       value={formData.Email}
                       onChange={handleChange}
-                      type="email" 
-                      placeholder="john@example.com" 
+                      type="email"
+                      placeholder="john@example.com"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none transition-all text-sm"
                     />
                   </div>
@@ -1046,19 +1047,19 @@ const Contact = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Phone Number</label>
-                    <input 
+                    <input
                       required
                       name="Phone"
                       value={formData.Phone}
                       onChange={handleChange}
-                      type="tel" 
-                      placeholder="+91 00000 00000" 
+                      type="tel"
+                      placeholder="+91 00000 00000"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none transition-all text-sm"
                     />
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Service</label>
-                    <select 
+                    <select
                       name="Service"
                       value={formData.Service}
                       onChange={handleChange}
@@ -1077,25 +1078,25 @@ const Contact = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Project Title</label>
-                    <input 
+                    <input
                       required
                       name="ProjectTitle"
                       value={formData.ProjectTitle}
                       onChange={handleChange}
-                      type="text" 
-                      placeholder="e.g. AI Chatbot" 
+                      type="text"
+                      placeholder="e.g. AI Chatbot"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none transition-all text-sm"
                     />
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Expected Price</label>
-                    <input 
+                    <input
                       required
                       name="ExpectedPrice"
                       value={formData.ExpectedPrice}
                       onChange={handleChange}
-                      type="text" 
-                      placeholder="e.g. ₹5000" 
+                      type="text"
+                      placeholder="e.g. ₹5000"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none transition-all text-sm"
                     />
                   </div>
@@ -1103,18 +1104,18 @@ const Contact = () => {
 
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Message</label>
-                  <textarea 
+                  <textarea
                     required
                     name="Message"
                     value={formData.Message}
                     onChange={handleChange}
-                    rows={3} 
-                    placeholder="Tell us about your project requirements..." 
+                    rows={3}
+                    placeholder="Tell us about your project requirements..."
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none transition-all text-sm"
                   ></textarea>
                 </div>
-                
-                <button 
+
+                <button
                   disabled={isSubmitting}
                   className={`w-full bg-amber-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-amber-700 transition-all shadow-lg shadow-amber-100 flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                 >
@@ -1174,9 +1175,9 @@ const Footer = () => {
               <li className="flex items-center gap-2"><Mail className="w-4 h-4" /> admin@indiwebpros.in</li>
               <li className="flex items-center gap-2"><MessageSquare className="w-4 h-4" /> +91 xx</li>
               <li className="mt-4">
-                <a 
-                  href="https://wa.me/918074223801" 
-                  target="_blank" 
+                <a
+                  href="https://wa.me/918074223801"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-rose-700 transition-all"
                 >
@@ -1308,7 +1309,7 @@ const ServicesPage = () => (
       </div>
     </div>
     <Services />
-    
+
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -1366,7 +1367,7 @@ const ProjectsPage = () => (
       </div>
     </div>
     <Portfolio />
-    
+
     <section className="py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-3xl font-bold text-slate-900 mb-6">Have a Project in Mind?</h2>
@@ -1391,11 +1392,7 @@ const ContactPage = () => (
       <meta name="description" content="Ready to start your project? Contact IndiWebPros for a free consultation and quote on web development and AI solutions." />
       <link rel="canonical" href="https://indiwebpros.in/contact" />
     </Helmet>
-    <div className="bg-slate-50 py-12 border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-slate-900">Contact IndiWebPros</h1>
-      </div>
-    </div>
+
     <Contact />
   </div>
 );
@@ -1413,6 +1410,12 @@ export default function App() {
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+
+            {/* 🔥 ADD THESE NEW SEO PAGES */}
+            <Route path="/capstone-project-help" element={<Suspense fallback={<div>Loading...</div>}><CapstonePage /></Suspense>} />
+            <Route path="/final-year-project-help" element={<Suspense fallback={<div>Loading...</div>}><FinalYearPage /></Suspense>} />
+            <Route path="/research-paper-writing" element={<Suspense fallback={<div>Loading...</div>}><ResearchPage /></Suspense>} />
+            <Route path="/plagiarism-removal-service" element={<Suspense fallback={<div>Loading...</div>}><PlagiarismPage /></Suspense>} />
           </Routes>
         </main>
         <Footer />
