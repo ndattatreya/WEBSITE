@@ -41,9 +41,7 @@ const ResearchPage = lazy(() => import('./pages/Research'))
 const PlagiarismPage = lazy(() => import('./pages/Plagiarism'))
 
 // --- Data ---
-
 const SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwQVhk4l2AtLxl63xXMW7TP91hznjtIdaEJrbcsklbQs1CQWg9IlEtng-QyXBqucxq1iQ/exec";
-const WHATSAPP_NUMBER = "xx"; // Corrected number
 
 // --- Scroll To Top Component ---
 const ScrollToTop = () => {
@@ -55,20 +53,23 @@ const ScrollToTop = () => {
 };
 
 // --- Floating WhatsApp Button ---
-const WhatsAppButton = () => (
-  <a
-    href={`https://wa.me/${WHATSAPP_NUMBER}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="fixed bottom-6 left-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center group"
-    aria-label="Contact us on WhatsApp"
-  >
-    <Phone className="w-6 h-6 fill-current" />
-    <span className="absolute left-full ml-4 bg-white text-slate-900 px-4 py-2 rounded-lg text-sm font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-      Chat with us!
-    </span>
-  </a>
-);
+const WhatsAppButton = () => {
+  return (
+    <a
+      href="https://wa.me/918074223801"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-6 left-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center group"
+      aria-label="Contact us on WhatsApp"
+    >
+      <Phone className="w-6 h-6 fill-current" />
+
+      <span className="absolute left-full ml-4 bg-white text-slate-900 px-4 py-2 rounded-lg text-sm font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+        Chat with us!
+      </span>
+    </a>
+  );
+};
 
 const services = [
   {
@@ -979,14 +980,14 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm text-slate-500">WhatsApp Support</p>
-                  <p className="font-bold text-slate-900">+91 xx</p>
+                  <a className="font-bold text-slate-900" href="https://wa.me/918074223801">Click Here</a>
                 </div>
               </div>
             </div>
 
             <div className="mt-12">
               <a
-                href="https://wa.me/xx"
+                href="https://wa.me/918074223801"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-full font-bold hover:bg-slate-950 transition-all shadow-lg shadow-slate-100"
@@ -1153,7 +1154,7 @@ const Footer = () => {
               <a href="https://www.linkedin.com/in/we-freelance" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-slate-800 flex items-center justify-center hover:bg-slate-900 hover:border-slate-900 hover:text-white transition-all">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="https://www.instagram.com/helpingstudents2026/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-slate-800 flex items-center justify-center hover:bg-slate-900 hover:border-slate-900 hover:text-white transition-all">
+              <a href="https://www.instagram.com/indiwebpros" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-slate-800 flex items-center justify-center hover:bg-slate-900 hover:border-slate-900 hover:text-white transition-all">
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
@@ -1352,6 +1353,77 @@ const ServicesPage = () => (
     <Process />
   </div>
 );
+
+<section className="py-20 bg-white border-t border-slate-100">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900">
+        Academic Project & Research Services
+      </h2>
+      <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
+        IndiWebPros also specializes in helping students complete their academic projects, 
+        research work, and assignments with expert guidance and support.
+      </p>
+    </div>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      {/* Capstone */}
+      <Link
+        to="/capstone-project-help"
+        className="border rounded-2xl p-6 hover:shadow-lg transition group"
+      >
+        <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-600">
+          Capstone Project Help
+        </h3>
+        <p className="text-sm text-slate-600 mt-2">
+          Complete assistance for capstone projects including development, report, and guidance.
+        </p>
+      </Link>
+
+      {/* Final Year */}
+      <Link
+        to="/final-year-project-help"
+        className="border rounded-2xl p-6 hover:shadow-lg transition group"
+      >
+        <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-600">
+          Final Year Projects
+        </h3>
+        <p className="text-sm text-slate-600 mt-2">
+          End-to-end support for BTech, MBA and degree final year projects.
+        </p>
+      </Link>
+
+      {/* Research */}
+      <Link
+        to="/research-paper-writing"
+        className="border rounded-2xl p-6 hover:shadow-lg transition group"
+      >
+        <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-600">
+          Research Paper Writing
+        </h3>
+        <p className="text-sm text-slate-600 mt-2">
+          High-quality research papers with proper citations and formatting.
+        </p>
+      </Link>
+
+      {/* Plagiarism */}
+      <Link
+        to="/plagiarism-removal-service"
+        className="border rounded-2xl p-6 hover:shadow-lg transition group"
+      >
+        <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-600">
+          Plagiarism Removal
+        </h3>
+        <p className="text-sm text-slate-600 mt-2">
+          Reduce plagiarism and improve originality of your academic documents.
+        </p>
+      </Link>
+
+    </div>
+  </div>
+</section>
 
 const ProjectsPage = () => (
   <div className="pt-20">
