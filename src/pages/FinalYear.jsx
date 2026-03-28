@@ -9,16 +9,16 @@ export default function FinalYearPage() {
 
       {/* INTRO */}
       <p className="text-lg text-slate-600 leading-relaxed">
-        IndiWebPros provides complete final year project help for students across India. 
-        Whether you are pursuing BTech, MBA, MCA, or any degree program, we help you successfully 
-        complete your academic project with high-quality implementation, proper documentation, 
+        IndiWebPros provides complete final year project help for students across India.
+        Whether you are pursuing BTech, MBA, MCA, or any degree program, we help you successfully
+        complete your academic project with high-quality implementation, proper documentation,
         and full guidance from start to finish.
       </p>
 
       <p className="text-slate-600 leading-relaxed">
-        Final year projects are one of the most important parts of your academic journey. 
-        Many students struggle with selecting the right topic, implementing the project, 
-        or preparing reports and presentations. That’s where IndiWebPros comes in — we simplify 
+        Final year projects are one of the most important parts of your academic journey.
+        Many students struggle with selecting the right topic, implementing the project,
+        or preparing reports and presentations. That’s where IndiWebPros comes in — we simplify
         the entire process and help you achieve better results with less stress.
       </p>
 
@@ -53,11 +53,77 @@ export default function FinalYearPage() {
         </h2>
 
         <p className="text-slate-600 leading-relaxed">
-          We provide final year projects across multiple domains including Computer Science, 
-          Artificial Intelligence, Machine Learning, Data Science, Web Development, and IoT. 
-          Our team works with technologies like Python, Java, MERN Stack, React, Node.js, 
+          We provide final year projects across multiple domains including Computer Science,
+          Artificial Intelligence, Machine Learning, Data Science, Web Development, and IoT.
+          Our team works with technologies like Python, Java, MERN Stack, React, Node.js,
           TensorFlow, and more.
         </p>
+      </div>
+
+      <div>
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">
+          Popular Final Year Project Topics for Students
+        </h2>
+
+        <p className="text-slate-600 leading-relaxed mb-6">
+          Choosing the right project topic is one of the biggest challenges for students.
+          At IndiWebPros, we provide guidance and development support for trending and
+          high-impact academic projects across multiple domains.
+        </p>
+
+        <div className="grid md:grid-cols-2 gap-8">
+
+          {/* AI & ML */}
+          <div>
+            <h3 className="font-bold text-lg mb-3 text-amber-600">AI & Machine Learning Projects</h3>
+            <ul className="space-y-2 text-slate-600">
+              <li>✔ AI Chatbot for Student Assistance</li>
+              <li>✔ Resume Screening System using ML</li>
+              <li>✔ Fake News Detection using NLP</li>
+              <li>✔ Face Recognition Attendance System</li>
+              <li>✔ Movie Recommendation System</li>
+              <li>✔ Credit Card Fraud Detection</li>
+            </ul>
+          </div>
+
+          {/* Web Dev */}
+          <div>
+            <h3 className="font-bold text-lg mb-3 text-amber-600">Web Development Projects</h3>
+            <ul className="space-y-2 text-slate-600">
+              <li>✔ E-commerce Website (MERN Stack)</li>
+              <li>✔ Online Job Portal System</li>
+              <li>✔ College Management System</li>
+              <li>✔ Online Food Ordering System</li>
+              <li>✔ Portfolio Website with Admin Panel</li>
+              <li>✔ Blog Website with CMS</li>
+            </ul>
+          </div>
+
+          {/* Data Science */}
+          <div>
+            <h3 className="font-bold text-lg mb-3 text-amber-600">Data Science Projects</h3>
+            <ul className="space-y-2 text-slate-600">
+              <li>✔ Sales Prediction using Machine Learning</li>
+              <li>✔ Stock Price Prediction System</li>
+              <li>✔ Customer Segmentation Analysis</li>
+              <li>✔ Covid-19 Data Analysis Dashboard</li>
+              <li>✔ Sentiment Analysis on Social Media</li>
+            </ul>
+          </div>
+
+          {/* IoT */}
+          <div>
+            <h3 className="font-bold text-lg mb-3 text-amber-600">IoT Projects</h3>
+            <ul className="space-y-2 text-slate-600">
+              <li>✔ Smart Home Automation System</li>
+              <li>✔ IoT-Based Smart Parking System</li>
+              <li>✔ Smart Agriculture Monitoring System</li>
+              <li>✔ Health Monitoring System using Sensors</li>
+              <li>✔ Accident Detection & Alert System</li>
+            </ul>
+          </div>
+
+        </div>
       </div>
 
       {/* PRICING */}
@@ -108,8 +174,8 @@ export default function FinalYearPage() {
         </h2>
 
         <p className="text-slate-600 leading-relaxed">
-          At IndiWebPros, we don’t just deliver your project — we guide you throughout 
-          the entire process. Our support includes explaining the code, helping you prepare 
+          At IndiWebPros, we don’t just deliver your project — we guide you throughout
+          the entire process. Our support includes explaining the code, helping you prepare
           for viva, and ensuring you fully understand your project.
         </p>
 
