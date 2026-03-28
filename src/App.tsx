@@ -39,6 +39,10 @@ const CapstonePage = lazy(() => import('./pages/Capstone'))
 const FinalYearPage = lazy(() => import('./pages/FinalYear'))
 const ResearchPage = lazy(() => import('./pages/Research'))
 const PlagiarismPage = lazy(() => import('./pages/Plagiarism'))
+import AIProjectsPage from "./pages/ai-projects";
+import WebProjectsPage from "./pages/web-development-projects";
+import DataSciencePage from "./pages/data-science-projects";
+import IoTProjectsPage from "./pages/iot-projects";
 
 // --- Data ---
 const SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwQVhk4l2AtLxl63xXMW7TP91hznjtIdaEJrbcsklbQs1CQWg9IlEtng-QyXBqucxq1iQ/exec";
@@ -1459,6 +1463,11 @@ export default function App() {
             <Route path="/final-year-project-help" element={<Suspense fallback={<div>Loading...</div>}><FinalYearPage /></Suspense>} />
             <Route path="/research-paper-writing" element={<Suspense fallback={<div>Loading...</div>}><ResearchPage /></Suspense>} />
             <Route path="/plagiarism-removal-service" element={<Suspense fallback={<div>Loading...</div>}><PlagiarismPage /></Suspense>} />
+
+            <Route path="/ai-projects" element={<AIProjectsPage />} />
+            <Route path="/web-development-projects" element={<WebProjectsPage />} />
+            <Route path="/data-science-projects" element={<DataSciencePage />} />
+            <Route path="/iot-projects" element={<IoTProjectsPage />} />
           </Routes>
         </main>
         <Footer />
