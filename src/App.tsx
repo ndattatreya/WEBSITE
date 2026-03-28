@@ -302,8 +302,8 @@ const Navbar = () => {
                 key={link.name}
                 to={link.href}
                 className={`text-base font-medium transition-colors ${isActive(link.href)
-                    ? 'text-amber-600'
-                    : isScrolled || location.pathname !== '/' ? 'text-slate-600 hover:text-slate-900' : 'text-white/80 hover:text-white'
+                  ? 'text-amber-600'
+                  : isScrolled || location.pathname !== '/' ? 'text-slate-600 hover:text-slate-900' : 'text-white/80 hover:text-white'
                   }`}
               >
                 {link.name}
@@ -364,64 +364,82 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section id="home" className="relative pt-40 pb-20 lg:pt-56 lg:pb-32 overflow-hidden">
-      {/* Background Accents */}
+    <section id="home" className="relative pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-40 lg:pb-32 overflow-hidden">
+
+      {/* Background */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-slate-100 rounded-full blur-3xl opacity-50" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-slate-200 rounded-full blur-3xl opacity-50" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-slate-900 uppercase bg-slate-50 rounded-full">
+
+          {/* Badge */}
+          <span className="inline-block px-3 py-1 mb-4 text-[10px] sm:text-xs font-bold tracking-widest text-slate-900 uppercase bg-slate-50 rounded-full">
             IndiWebPros – Expert Tech Solutions
           </span>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 leading-tight mb-6">
-            IndiWebPros – <span className="text-amber-600">Freelance Web Developer</span> & AI Solutions in India
+
+          {/* Heading */}
+          <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-slate-900 leading-tight mb-4">
+            IndiWebPros –{" "}
+            <span className="text-amber-600 block sm:inline">
+              Web Development & AI Solutions
+            </span>
           </h1>
-          <p className="max-w-3xl mx-auto text-lg md:text-xl text-slate-600 mb-10 leading-relaxed">
-            Transform your business with high-performance <strong>web development services</strong> and <strong>AI solutions</strong>.
-            At <strong>IndiWebPros</strong>, we solve complex business problems with scalable <strong>full stack development</strong>,
-            intelligent automation, and SEO-optimized digital experiences that drive real growth.
+
+          {/* Description */}
+          <p className="max-w-xl sm:max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-slate-600 mb-8 leading-relaxed">
+            Build powerful websites and AI solutions with{" "}
+            <strong>IndiWebPros</strong>. We deliver{" "}
+            <strong>full stack development</strong>, automation, and SEO-driven
+            digital products to help you grow faster.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
+
             <Link
               to="/contact"
-              className="w-full sm:w-auto bg-amber-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-700 transition-all shadow-xl shadow-amber-200 flex items-center justify-center gap-2"
-              aria-label="Start Your Project with IndiWebPros"
+              className="w-full sm:w-auto bg-amber-600 text-white px-6 py-3 rounded-full font-semibold text-sm sm:text-base hover:bg-amber-700 transition-all shadow-md flex items-center justify-center gap-2"
             >
-              Start Your Project <ArrowRight className="w-5 h-5" />
+              Start Project <ArrowRight className="w-4 h-4" />
             </Link>
+
             <Link
               to="/services"
-              className="w-full sm:w-auto bg-white text-amber-600 border border-amber-100 px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-50 transition-all"
-              aria-label="Get a Free Consultation from IndiWebPros"
+              className="w-full sm:w-auto bg-white text-amber-600 border border-amber-200 px-6 py-3 rounded-full font-semibold text-sm sm:text-base hover:bg-amber-50 transition-all"
             >
-              Get a Free Consultation
+              Free Consultation
             </Link>
+
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto border-t border-slate-100 pt-12">
+          {/* Features */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto border-t border-slate-100 pt-8">
+
             {[
-              { label: "Fast Delivery", sub: "Launch in Days", icon: <Clock className="w-5 h-5 text-slate-900" aria-hidden="true" /> },
-              { label: "Secure & Scalable", sub: "Enterprise Grade", icon: <Zap className="w-5 h-5 text-slate-900" aria-hidden="true" /> },
-              { label: "Expert Tech", sub: "Modern Stack", icon: <ShieldCheck className="w-5 h-5 text-slate-900" aria-hidden="true" /> },
-              { label: "24/7 Support", sub: "Always Online", icon: <MessageSquare className="w-5 h-5 text-slate-900" aria-hidden="true" /> }
+              { label: "Fast Delivery", sub: "Launch in Days", icon: <Clock className="w-4 h-4" /> },
+              { label: "Secure & Scalable", sub: "Enterprise Grade", icon: <Zap className="w-4 h-4" /> },
+              { label: "Expert Tech", sub: "Modern Stack", icon: <ShieldCheck className="w-4 h-4" /> },
+              { label: "24/7 Support", sub: "Always Online", icon: <MessageSquare className="w-4 h-4" /> }
             ].map((item, i) => (
-              <div key={i} className="flex flex-col items-center justify-center gap-1 text-slate-600 font-medium text-sm">
-                <div className="flex items-center gap-2">
+              <div key={i} className="flex flex-col items-center gap-1 text-slate-600 text-xs sm:text-sm">
+                <div className="flex items-center gap-1">
                   {item.icon}
-                  <span className="text-slate-900 font-bold">{item.label}</span>
+                  <span className="font-semibold text-slate-900">{item.label}</span>
                 </div>
-                <span className="text-xs text-slate-400">{item.sub}</span>
+                <span className="text-[10px] sm:text-xs text-slate-400">{item.sub}</span>
               </div>
             ))}
+
           </div>
+
         </motion.div>
       </div>
     </section>
@@ -679,8 +697,8 @@ const Portfolio = () => {
                 key={type}
                 onClick={() => setFilter(type as any)}
                 className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${filter === type
-                    ? 'bg-slate-700 text-white shadow-lg shadow-slate-900/20'
-                    : 'text-slate-400 hover:text-white'
+                  ? 'bg-slate-700 text-white shadow-lg shadow-slate-900/20'
+                  : 'text-slate-400 hover:text-white'
                   }`}
               >
                 {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -703,8 +721,8 @@ const Portfolio = () => {
                   key={cat}
                   onClick={() => setSubFilter(cat)}
                   className={`px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all border ${subFilter === cat
-                      ? 'bg-slate-700/10 border-slate-500 text-slate-400'
-                      : 'bg-slate-800/50 border-slate-700 text-slate-500 hover:text-slate-300 hover:border-slate-600'
+                    ? 'bg-slate-700/10 border-slate-500 text-slate-400'
+                    : 'bg-slate-800/50 border-slate-700 text-slate-500 hover:text-slate-300 hover:border-slate-600'
                     }`}
                 >
                   {cat}
@@ -1268,6 +1286,7 @@ const HomePage = () => {
       <Hero />
       <About />
       <WhyChoose />
+
       <Services />
       <Portfolio />
       <Pricing />
@@ -1285,11 +1304,6 @@ const AboutPage = () => (
       <meta name="description" content="Learn more about IndiWebPros, your partner in digital excellence. We specialize in high-performance web development and AI solutions for startups and businesses." />
       <link rel="canonical" href="https://indiwebpros.in/about" />
     </Helmet>
-    <div className="bg-slate-50 py-12 border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-slate-900">About IndiWebPros</h1>
-      </div>
-    </div>
     <About />
     <WhyChoose />
     <Process />
@@ -1303,12 +1317,6 @@ const ServicesPage = () => (
       <meta name="description" content="Explore our expert web development services, custom AI solutions, and full-stack development. We build scalable digital products for global clients." />
       <link rel="canonical" href="https://indiwebpros.in/services" />
     </Helmet>
-    <div className="bg-slate-50 py-12 border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-slate-900">Our Services at IndiWebPros</h1>
-        <p className="mt-4 text-slate-600 max-w-3xl">We provide end-to-end digital solutions designed to help businesses scale. From high-converting websites to advanced AI automation, our services are tailored to your specific goals.</p>
-      </div>
-    </div>
     <Services />
 
     <section className="py-24 bg-white">
@@ -1349,81 +1357,50 @@ const ServicesPage = () => (
       </div>
     </section>
 
+    <Services />
+
+    {/* 🔥 NEW SEO PROJECT LINKS SECTION */}
+    <section className="py-16 bg-slate-50 border-b border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <h2 className="text-3xl font-bold text-slate-900 mb-6">
+          Explore Popular Student Projects
+        </h2>
+
+        <p className="text-slate-600 max-w-3xl mb-10">
+          We provide complete support for final year academic projects including development, documentation, and deployment. Explore our most in-demand project categories below.
+        </p>
+
+        <div className="grid md:grid-cols-4 gap-6">
+
+          <Link to="/ai-projects" className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+            <h3 className="font-bold text-lg text-amber-600 mb-2">AI Projects</h3>
+            <p className="text-sm text-slate-600">Machine learning, NLP, chatbots, and intelligent systems.</p>
+          </Link>
+
+          <Link to="/web-development-projects" className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+            <h3 className="font-bold text-lg text-amber-600 mb-2">Web Projects</h3>
+            <p className="text-sm text-slate-600">Full-stack MERN apps, portals, and real-world platforms.</p>
+          </Link>
+
+          <Link to="/data-science-projects" className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+            <h3 className="font-bold text-lg text-amber-600 mb-2">Data Science</h3>
+            <p className="text-sm text-slate-600">Prediction models, analytics, and dashboards.</p>
+          </Link>
+
+          <Link to="/iot-projects" className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+            <h3 className="font-bold text-lg text-amber-600 mb-2">IoT Projects</h3>
+            <p className="text-sm text-slate-600">Smart systems using sensors, automation, and hardware.</p>
+          </Link>
+
+        </div>
+      </div>
+    </section>
+
     <Pricing />
     <Process />
   </div>
 );
-
-<section className="py-20 bg-white border-t border-slate-100">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-    <div className="text-center mb-12">
-      <h2 className="text-3xl font-bold text-slate-900">
-        Academic Project & Research Services
-      </h2>
-      <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
-        IndiWebPros also specializes in helping students complete their academic projects, 
-        research work, and assignments with expert guidance and support.
-      </p>
-    </div>
-
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-      {/* Capstone */}
-      <Link
-        to="/capstone-project-help"
-        className="border rounded-2xl p-6 hover:shadow-lg transition group"
-      >
-        <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-600">
-          Capstone Project Help
-        </h3>
-        <p className="text-sm text-slate-600 mt-2">
-          Complete assistance for capstone projects including development, report, and guidance.
-        </p>
-      </Link>
-
-      {/* Final Year */}
-      <Link
-        to="/final-year-project-help"
-        className="border rounded-2xl p-6 hover:shadow-lg transition group"
-      >
-        <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-600">
-          Final Year Projects
-        </h3>
-        <p className="text-sm text-slate-600 mt-2">
-          End-to-end support for BTech, MBA and degree final year projects.
-        </p>
-      </Link>
-
-      {/* Research */}
-      <Link
-        to="/research-paper-writing"
-        className="border rounded-2xl p-6 hover:shadow-lg transition group"
-      >
-        <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-600">
-          Research Paper Writing
-        </h3>
-        <p className="text-sm text-slate-600 mt-2">
-          High-quality research papers with proper citations and formatting.
-        </p>
-      </Link>
-
-      {/* Plagiarism */}
-      <Link
-        to="/plagiarism-removal-service"
-        className="border rounded-2xl p-6 hover:shadow-lg transition group"
-      >
-        <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-600">
-          Plagiarism Removal
-        </h3>
-        <p className="text-sm text-slate-600 mt-2">
-          Reduce plagiarism and improve originality of your academic documents.
-        </p>
-      </Link>
-
-    </div>
-  </div>
-</section>
 
 const ProjectsPage = () => (
   <div className="pt-20">
@@ -1432,12 +1409,6 @@ const ProjectsPage = () => (
       <meta name="description" content="Browse our portfolio of successful web development and AI projects. See how IndiWebPros helps clients achieve digital success." />
       <link rel="canonical" href="https://indiwebpros.in/projects" />
     </Helmet>
-    <div className="bg-slate-50 py-12 border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-slate-900">IndiWebPros Portfolio & Projects</h1>
-        <p className="mt-4 text-slate-600 max-w-3xl">Explore our diverse range of projects, from high-performance business websites to advanced AI solutions. Each project is a testament to our commitment to quality, innovation, and client success.</p>
-      </div>
-    </div>
     <Portfolio />
 
     <section className="py-24 bg-slate-50">
